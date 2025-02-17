@@ -12,7 +12,7 @@ $pdo = pdo_connect_mysql();
 
 $separator = " tickets";
 $chars = ["{","}","[","]"];
-$query = 'SELECT * FROM tickets';
+$query = 'SELECT status, ticket_id, subject, msg, created FROM tickets';
 
 if (!empty($_POST['search'])) {
     $search = escapeshellarg($_POST['search']);
@@ -126,7 +126,6 @@ if (count($pieces) != $count) {
                             </div>
                         </form>
                     </div>
-
                 </td>
             </tr>
         </tbody>
@@ -143,58 +142,7 @@ if (count($pieces) != $count) {
             <button class="nav-items nav-link" id="resolved-tab" data-bs-toggle="tab" data-bs-target="#resolved" type="button" role="tab" <?php if (!empty($_POST['status'])): ?>hidden<?php endif; ?>><?php if (empty($_POST['status'])): ?>Resolved<?php elseif(!empty($_POST['status'])): ?><?php endif; ?></button>
         </li>
         </ul>
-        <?php if($plain): ?>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane show active" id="open" role="tabpanel">
-                    <?php foreach ($open as $o): ?>
-                        <?php if ($o['status'] == 'open'): ?>
-                            <a href="<?=$_SESSION['type']?>view.php?ticket_id=<?=$o['ticket_id']?>" class="ticket">
-                                <span class="con">
-                                <i class="far fa-clock fa-2x"></i>
-                                </span>
-                                <span class="con">
-                                    <span class="subject"><?=htmlspecialchars($o['subject'], ENT_QUOTES)?></span>
-                                    <span class="msg"><?=htmlspecialchars($o['msg'], ENT_QUOTES)?></span>
-                                </span>
-                                <span class="con created"><?=date('F dS, G:ia', strtotime($o['created']))?></span>
-                            </a>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <div class="tab-pane" id="closed" role="tabpanel">
-                    <?php foreach ($closed as $c): ?>
-                        <?php if ($c['status'] == 'closed'): ?>
-                            <a href="<?=$_SESSION['type']?>view.php?ticket_id=<?=$c['ticket_id']?>" class="ticket">
-                                <span class="con">
-                                <i class="fas fa-times fa-2x"></i>
-                                </span>
-                                <span class="con">
-                                    <span class="subject"><?=htmlspecialchars($c['subject'], ENT_QUOTES)?></span>
-                                    <span class="msg"><?=htmlspecialchars($c['msg'], ENT_QUOTES)?></span>
-                                </span>
-                                <span class="con created"><?=date('F dS, G:ia', strtotime($c['created']))?></span>
-                            </a>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <div class="tab-pane" id="resolved" role="tabpanel">
-                    <?php foreach ($resolved as $r): ?>
-                        <?php if ($r['status'] == 'resolved'): ?>
-                            <a href="<?=$_SESSION['type']?>view.php?ticket_id=<?=$r['ticket_id']?>" class="ticket">
-                                <span class="con">
-                                <i class="fas fa-check fa-2x"></i>
-                                </span>
-                                <span class="con">
-                                    <span class="subject"><?=htmlspecialchars($r['subject'], ENT_QUOTES)?></span>
-                                    <span class="msg"><?=htmlspecialchars($r['msg'], ENT_QUOTES)?></span>
-                                </span>
-                                <span class="con created"><?=date('F dS, G:ia', strtotime($r['created']))?></span>
-                            </a>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        <?php elseif(empty($_POST['status'])): ?>
+        <?php if(empty($_POST['status'])): ?>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane show active" id="open" role="tabpanel">
                     <?php foreach ($articles as $a): ?>

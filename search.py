@@ -59,56 +59,56 @@ if post == "kba":
         X = sparse.load_npz("device.npz")
         vect = device_vectorizer.transform([x[0]])
         results = cosine_similarity(X,vect).reshape((-1,))
-        
-        #this list will hold the ticket id's that match
+
+        #Currently set to only show results that are 30% similar
         for i in results.argsort()[-10:][::-1]:
-            if results[i] > 0.5: #read from database/configuration
+            if results[i] > 0.3: 
                 tid.append(data.iloc[i,0])
-        
+
         Y = sparse.load_npz("content.npz")
         vecta = content_vectorizer.transform([x[1]])
         resultsa = cosine_similarity(Y,vecta).reshape((-1,))
-        
+
         for i in resultsa.argsort()[-10:][::-1]:
-            if resultsa[i] > 0.5:
+            if resultsa[i] > 0.3:
                 tida.append(data.iloc[i,0])
         print(set(tid) & set(tida))
-        
+
     #else if statement to handle kba.php if statement 2 (when the device field was left empty, but search was populated).
     elif x[0] == "":
         #Find tickets that used the product described in the ticket, or similar products
         Y = sparse.load_npz("content.npz")
         vecta = content_vectorizer.transform([x[1]])
         resultsa = cosine_similarity(Y,vecta).reshape((-1,))
-        
-        #this list will hold the ticket id's that 
+
+        #Currently set to only show results that are 30% similar 
         for i in resultsa.argsort()[-10:][::-1]:
-            if resultsa[i] > 0.5:
+            if resultsa[i] > 0.3:
                 tida.append(data.iloc[i,0])
         print(tida)
-        
+
     elif x[1] == "":
         #Find tickets that used the product described in the ticket, or similar products
         X = sparse.load_npz("device.npz")
         vect = device_vectorizer.transform([x[0]])
         results = cosine_similarity(X,vect).reshape((-1,))
-        
-        #this list will hold the ticket id's that 
+
+        #Currently set to only show results that are 30% similar
         for i in results.argsort()[-10:][::-1]:
-            if results[i] > 0.5: #read from database/configuration
+            if results[i] > 0.3:
                 tid.append(data.iloc[i,0])
-                
+
         print(tid)
 else:
     #Find tickets that used the product described in the ticket, or similar products
     Z = sparse.load_npz("subject.npz")
     vect = ticket_vectorizer.transform([x[0]])
     results = cosine_similarity(Z,vect).reshape((-1,))
-    
-    #this list will hold the ticket id's that match
+
+    #Currently set to only show results that are 30% similar
     for i in results.argsort()[-10:][::-1]:
         if results[i] > 0.3: #read from database/configuration
             tid.append(data.iloc[i,0])
-            
+
     print(tid)
 
