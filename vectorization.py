@@ -11,21 +11,20 @@ x = sys.argv[0]
 
 # The database URL must be in a specific format
 db_url = "mysql+mysqlconnector://{USER}:{PWD}@{HOST}/{DBNAME}"
-# Replace the values below with your own
-# DB username, password, host and database name
+
 db_url = db_url.format(
     USER = "root",
     PWD = "Passw0rd",
     HOST = "localhost",
-    DBNAME = "phpticket"
+    DBNAME = "ticketing_system"
 )
 # Create the DB engine instance. We'll use
 # this engine to connect to the database
 engine = create_engine(db_url)
 
-sql_query = text("select id, content_clean, device from potato")
+sql_query = text("select id, content_clean, device from articles")
 sql_query_ticket = text("select ticket_id, subject from tickets")
- 
+
 # Execute the query and store result in
 # the DataFrame 'data'
 with engine.begin() as conn:
@@ -38,9 +37,7 @@ with engine.begin() as conn:
         con=conn
     )
 
-#Initialize the vectorizer
 tfidf_vectorizer = TfidfVectorizer()
-#---------------
 
 tid = []
 tida = []
@@ -51,7 +48,6 @@ if "article" in x:
     X = tfidf_vectorizer.fit_transform(data['device'])
     joblib.dump(tfidf_vectorizer,'device.pkl')
     sparse.save_npz("device.npz", X, False)
-    
     Y = tfidf_vectorizer.fit_transform(data['content_clean'])
     joblib.dump(tfidf_vectorizer,'content.pkl')
     sparse.save_npz("content.npz", Y, False)
