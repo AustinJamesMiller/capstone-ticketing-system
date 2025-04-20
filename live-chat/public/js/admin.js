@@ -12,7 +12,7 @@ var $loginPage = $('.login.page'); // The login page
 var $errorPage = $('.error.page'); // The error page
 var $chatPage = $('.chat.page'); // The chat page
 var $userList = $('.adminList'); // List of online admins
-var $inputMessage; // Input message input box
+var $inputMessage; // Input message input box.16.138.18/
 var $messages; // Messages area
 
 var username;	//Store admin username

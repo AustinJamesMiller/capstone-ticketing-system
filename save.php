@@ -27,7 +27,7 @@ if ($row) {
     header('Location: articleview.php?id=' . $id);
 } else {
     $stmt= $pdo->prepare("INSERT IGNORE INTO articles (title, title_clean, authors, content, content_clean, device, category) VALUES(?,?,?,?,?,?,?)");
-    $stmt->execute([$title, $title_clean, $authors, $content, $content_clean, $content_clean, $device, $category]);
+    $stmt->execute([$title, $title_clean, $authors, $content, $content_clean, $device, $category]);
     header('Location: articleview.php?id=' . $pdo->lastInsertId());
 }
 

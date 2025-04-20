@@ -82,7 +82,7 @@ ul {
 .login.page .usernameInput,
 .passwordInput {
     color: #fff;
-    font-weight: 100;
+    font-weight: 500;
 }
 
 
@@ -92,13 +92,11 @@ ul {
     width: 85%;
     height: 95%;
     padding: 1em;
-    padding-left: 5em;
-    float: left;
+/*    padding-left: 5em; */
+/*    float: left; */
 }
 
 .usersOnline {
-    width: 15%;
-    float: left;
     height: 100%;
     text-align: center;
     border-left: 1px solid #000
@@ -125,6 +123,10 @@ ul {
     font-size: 150%;
 }
 
+.messagesa {
+    font-size: 125%;
+}
+
 .inputMessage {
     font-size: 100%;
 }
@@ -140,11 +142,20 @@ ul {
 /* Messages */
 
 .chatArea {
-    height: 55%;
-    width: 30%;
+/*    height: 55%; */
+/*    width: 30%; */
     border: 1px solid #000;
     padding: 0em 1em 1em 1em;
-    float: left;
+/*    float: left; */
+    overflow: hidden;
+}
+
+.chatAreaa {
+/*    height: 55%; */
+/*    width: 30%; */
+    border: 1px solid #000;
+    padding: 0em 1em 1em 1em;
+/*    float: left; */
     overflow: hidden;
 }
 
@@ -157,11 +168,27 @@ ul {
     border-bottom: 0.1em solid #000;
 }
 
+.chatHeadera {
+    height: 9%;
+    padding: 0.5em 0.5em 0.1em 0;
+}
+
 .messages {
     height: 65%;
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
     overflow: auto;
+}
+
+.messagea {
+    width:100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.messageBodya {
+    width:50%;
+    display: inline-block;
 }
 
 .username,
@@ -175,6 +202,14 @@ ul {
     color: gray;
     font-size: 70%;
     margin: 5px;
+    text-align: right;
+}
+
+.timestampa {
+    color: gray;
+    font-size: 70%;
+    width:50%;
+    display: inline-block;
     text-align: right;
 }
 
@@ -193,4 +228,26 @@ ul {
     outline: none;
     padding-left: 10px;
     width: 100%;
+}
+
+ul {
+  padding: 0;
+}
+li {
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 8px;
+}
+a {
+  cursor: pointer;
+  color: #7ca6e0;
+}
+a:hover {
+  text-decoration: underline;
+}
+.hideable-section {
+  display: none;
+}
+.hideable-section:first-of-type {
+  display: block;
 }

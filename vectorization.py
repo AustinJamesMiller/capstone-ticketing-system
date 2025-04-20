@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 #Stack our imports here
 import sys
 import pandas as pd

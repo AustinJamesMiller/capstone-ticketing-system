@@ -62,7 +62,7 @@ if post == "kba":
 
         #Currently set to only show results that are 30% similar
         for i in results.argsort()[-10:][::-1]:
-            if results[i] > 0.3: 
+            if results[i] > 0.3:
                 tid.append(data.iloc[i,0])
 
         Y = sparse.load_npz("content.npz")

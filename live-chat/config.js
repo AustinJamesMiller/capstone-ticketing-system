@@ -1,5 +1,5 @@
 var config = {
-	parentDomain : 'http://localhost', 	//Host Domain
+	parentDomain : 'http://localhost',      	//Host Domain
 	web_port : 8080,							//Port where app will be hosted
 	admin_url : '/adminURL',					//Choose a URL where admin panel can be accessed
 	redis_port : 6379,							//Redis Port

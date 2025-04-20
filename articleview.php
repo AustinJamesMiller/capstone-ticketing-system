@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'functions.php';
 
 $pdo = pdo_connect_mysql();
@@ -23,9 +23,11 @@ if (empty($article)) {
 <div class="content view">
     <h2><?=htmlspecialchars($article['title_clean'], ENT_QUOTES)?></h2>
     <p style="border-bottom: 1px solid #ebebeb; padding-bottom: 11px; padding-top: 11px;">Device: <?=nl2br($article['device'], ENT_QUOTES)?></p>
-    <div class="btns" style="border-bottom: 1px solid #ebebeb; padding-bottom: 11px">
+    <?php if ($_SESSION['loggedin'] and $_SESSION['type'] == "admin"): ?>
+        <div class="btns" style="border-bottom: 1px solid #ebebeb; padding-bottom: 11px">
         <a href="editarticle.php?id=<?=$_GET['id']?>" class="btn red">EDIT</a>
-    </div>
+        </div>
+    <?php endif; ?>
     <div class="ticket">
         <?=nl2br($article['content'], ENT_QUOTES)?>
         <p style="border-top: 1px solid #000000; padding-top: 11px"><?=$article['authors']?></p>
